@@ -1,5 +1,0 @@
-{
-    "python.pythonPath": "C:\\Users\\Jonathan Laptop\\AppData\\Local\\Programs\\Python\\Python38-32\\python.exe",
-    "python.linting.enabled": false,
-    "python.formatting.provider": "black"
-}
