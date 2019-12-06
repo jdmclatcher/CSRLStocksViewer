@@ -9,8 +9,6 @@ from stocks import *
 
 daily("MSFT")
 print()
-# weekly("MSFT")
-# print()
-# monthly("MSFT")
-
-# showChart(weekly("MSFT"), "THE GREAT CHART OF STONKS")
+weekly("MSFT")
+print()
+monthly("MSFT")

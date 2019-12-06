@@ -56,7 +56,6 @@ def monthly(symbol):
     return
 
 
-# TODO - add more variables and customization to chart
 def showChart(data, chartTitle):
     # TODO - fix charting
     # data validation to prevent daily from beign charted
@@ -65,21 +64,23 @@ def showChart(data, chartTitle):
     plt.show()
 
 
+# TODO - add dates
 # private function
 def __printData(data, symbol):
     # formatting
     sys.stdout.write(Style.BRIGHT + '#### "' + symbol + '" STOCK PRICE - ')
     if len(data) < 7:
-        print(Style.BRIGHT + "TODAY ####")
+        sys.stdout.write(Style.BRIGHT + "TODAY ####\n" + Style.RESET_ALL)
         # TODO - needs better formatting/cleanup
         print(data)
         return
     if len(data) >= 7 and len(data) < 30:
-        print(Style.BRIGHT + "LAST 7 DAYS ####")
+        sys.stdout.write(Style.BRIGHT + "LAST 7 DAYS ####\n" + Style.RESET_ALL)
     if len(data) >= 30:
-        print(Style.BRIGHT + "LAST 30 DAYS ####")
+        sys.stdout.write(Style.BRIGHT + "LAST 30 DAYS ####\n" + Style.RESET_ALL)
     for item in data:
+        sys.stdout.write("MM/DD/YYYY: ")
         if item > 0:
-            print(Fore.GREEN + str(item))
+            sys.stdout.write(Fore.GREEN + str(item) + "\n" + Fore.RESET)
         else:
-            print(Fore.RED + str(item))
+            sys.stdout.write(Fore.RED + str(item) + "\n" + Fore.RESET)
