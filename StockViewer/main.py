@@ -5,13 +5,12 @@
 
 from stocks import *
 
-# functional - TODO needs styling
-printData(daily("MSFT"))
+# TODO - user input for symbol and what data to show
 
-# functional - TODO needs styling
-# printData(weekly("MSFT"))
+daily("MSFT")
+print()
+# weekly("MSFT")
+# print()
+# monthly("MSFT")
 
-# TODO - needs work
-# printData(monthly("MSFT"))
-
-# showChart(weekly("AMZN"), "LE EPIC CHORT")
+# showChart(weekly("MSFT"), "THE GREAT CHART OF STONKS")
