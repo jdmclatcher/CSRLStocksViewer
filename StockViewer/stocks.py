@@ -6,8 +6,6 @@
 # alpha vantage API to get realtime stock market prices
 from alpha_vantage.timeseries import TimeSeries
 
-import matplotlib.pyplot as plt  # for charting
-
 import sys
 import colorama  # for colored console text
 from colorama import Fore, Style
@@ -54,14 +52,6 @@ def monthly(symbol):
         y = y + 1
     __printData(newData, symbol)
     return
-
-
-def showChart(data, chartTitle):
-    # TODO - fix charting
-    # data validation to prevent daily from beign charted
-    data.plot()
-    plt.title(chartTitle)
-    plt.show()
 
 
 # TODO - add dates
