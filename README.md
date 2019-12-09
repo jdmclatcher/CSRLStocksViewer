@@ -6,6 +6,10 @@ Stock Market viewer application written in Python by the Johns Creek CSRL Embedd
 
 This application provides various functions for viewing stock prices for every trading company.
 
+## How to Use
+
+Run `main.py` and follow the corresponding instructions.
+
 # Functions
 
 ## `daily()`
