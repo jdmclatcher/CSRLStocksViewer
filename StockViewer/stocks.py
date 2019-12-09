@@ -1,10 +1,10 @@
-# Jonathan McLatcher
 # Embedded Programming
 # Stock Viewer Python
 # stocks.py
 
 # alpha vantage API to get realtime stock market prices
 from alpha_vantage.timeseries import TimeSeries
+from pprint import pprint
 
 import sys
 import colorama  # for colored console text
@@ -15,13 +15,14 @@ colorama.init()
 # create ref to timeseries
 ts = TimeSeries(key="B664X0BHILI87QRE", output_format="pandas")
 
+# Jonathan McLatcher
 
 # gets stock results from current day
 def daily(symbol):
-    data = ts.get_quote_endpoint(symbol)
+    data, meta_data = ts.get_quote_endpoint(symbol)
     newData = []
-    newData.append(data[0]["05. price"])
-    newData.append(data[0]["10. change percent"])
+    newData.append(data["05. price"][0])
+    newData.append(data["10. change percent"][0])
     __printData(newData, symbol)
     return
 
@@ -29,48 +30,43 @@ def daily(symbol):
 # last 7 days - close price
 def weekly(symbol):
     data, meta_data = ts.get_daily(symbol, outputsize="compact")
-    newData = []
-    y = 0
-    for item in data["4. close"]:
-        if y == 7:
-            break
-        newData.append(item)
-        y = y + 1
-    __printData(newData, symbol)
+    sys.stdout.write(
+        Style.BRIGHT
+        + '#### "'
+        + symbol
+        + '" STOCK PRICE - LAST 7 DAYS ####\n'
+        + Style.RESET_ALL
+    )
+    pprint(data.head(7))
     return
 
 
 # last 30 days - close price
 def monthly(symbol):
     data, meta_data = ts.get_daily(symbol, outputsize="compact")
-    newData = []
-    y = 0
-    for item in data["4. close"]:
-        if y == 30:
-            break
-        newData.append(item)
-        y = y + 1
-    __printData(newData, symbol)
+    sys.stdout.write(
+        Style.BRIGHT
+        + '#### "'
+        + symbol
+        + '" STOCK PRICE - LAST 30 DAYS ####\n"'
+        + Style.RESET_ALL
+    )
+    pprint(data.head(30))
     return
 
 
-# TODO - add dates
+# Joe Francesconi
 # private function
 def __printData(data, symbol):
     # formatting
     sys.stdout.write(Style.BRIGHT + '#### "' + symbol + '" STOCK PRICE - ')
     if len(data) < 7:
         sys.stdout.write(Style.BRIGHT + "TODAY ####\n" + Style.RESET_ALL)
-        # TODO - needs better formatting/cleanup
-        print(data)
-        return
-    if len(data) >= 7 and len(data) < 30:
-        sys.stdout.write(Style.BRIGHT + "LAST 7 DAYS ####\n" + Style.RESET_ALL)
-    if len(data) >= 30:
-        sys.stdout.write(Style.BRIGHT + "LAST 30 DAYS ####\n" + Style.RESET_ALL)
-    for item in data:
-        sys.stdout.write("MM/DD/YYYY: ")
-        if item > 0:
-            sys.stdout.write(Fore.GREEN + str(item) + "\n" + Fore.RESET)
+        print("Price: " + data[0])
+        sys.stdout.write("Percent Change: ")
+        percent = str(data[1])
+        if float(percent[0:-1]) > 0:
+            sys.stdout.write(Fore.GREEN + str(data[1]) + "\n" + Fore.RESET)
         else:
-            sys.stdout.write(Fore.RED + str(item) + "\n" + Fore.RESET)
+            sys.stdout.write(Fore.RED + str(data[1]) + "\n" + Fore.RESET)
+        return
