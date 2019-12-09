@@ -15,11 +15,10 @@ colorama.init()
 # create ref to timeseries
 ts = TimeSeries(key="B664X0BHILI87QRE", output_format="pandas")
 
-# Jonathan McLatcher
-
 # gets stock results from current day
 def daily(symbol):
     data, meta_data = ts.get_quote_endpoint(symbol)
+    # create new dictionary to store specific values in
     newData = []
     newData.append(data["05. price"][0])
     newData.append(data["10. change percent"][0])
@@ -37,6 +36,7 @@ def weekly(symbol):
         + '" STOCK PRICE - LAST 7 DAYS ####\n'
         + Style.RESET_ALL
     )
+    # formatted printing of data
     pprint(data.head(7))
     return
 
@@ -51,17 +51,18 @@ def monthly(symbol):
         + '" STOCK PRICE - LAST 30 DAYS ####\n"'
         + Style.RESET_ALL
     )
+    # formatted printing of data
     pprint(data.head(30))
     return
 
 
-# Joe Francesconi
 # private function
 def __printData(data, symbol):
     # formatting
     sys.stdout.write(Style.BRIGHT + '#### "' + symbol + '" STOCK PRICE - ')
     if len(data) < 7:
         sys.stdout.write(Style.BRIGHT + "TODAY ####\n" + Style.RESET_ALL)
+        # format and print out price and percent change
         print("Price: " + data[0])
         sys.stdout.write("Percent Change: ")
         percent = str(data[1])

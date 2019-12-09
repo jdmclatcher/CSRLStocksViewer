@@ -6,7 +6,6 @@ from stocks import *
 
 
 def main():
-    # Alex Eyerly
     # Gets the company and type of summary to provide
     stockSelect = input(
         "What company would you like to see? Please enter the abbreviated symbol for the company. "
